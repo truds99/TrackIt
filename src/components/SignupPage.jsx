@@ -29,6 +29,7 @@ export default function SignupPage() {
 
     const handleForm = (e) => {
         e.preventDefault();
+        if (!submitAvailable) return;
         setSubmitAvailable(false);
         if (!validInputs()) return;
         const promise = postSignup(formData);
@@ -50,7 +51,7 @@ export default function SignupPage() {
     return (
         <SignupPageStyled $submitAvailable={submitAvailable}>
             <img src={logo} />
-            <form onSubmit={handleForm}>
+            <form onSubmit={submitAvailable && handleForm}>
                 <input
                     type="email"
                     name="email"

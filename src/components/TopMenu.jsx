@@ -1,16 +1,15 @@
 import styled from "styled-components";
-import image from '../assets/imageTextMenu.png'
 import textLogo from '../assets/textLogo.svg'
 import UserContext from "../contexts/UserContext";
 import { useContext } from "react";
 
 export default function TopMenu() {
-    const { menuVisible } = useContext(UserContext);
+    const { menuVisible, loginData } = useContext(UserContext);
     
     return (
         <TopMenuStyled $menuVisible={menuVisible}>
             <img src={textLogo} />
-            <img src={image} />
+            <img src={loginData.image} />
         </TopMenuStyled>
     )
 }
@@ -28,9 +27,10 @@ const TopMenuStyled = styled.div`
     background-color: #126BA5;
     display: ${props => props.$menuVisible ? 'flex' : 'none' };
 
-    img:nth-child(2) {
-    width: 51px;
-    height: 51px;
-    border-radius: 50%;
+    & img:nth-child(2) {
+        width: 51px;
+        height: 51px;
+        border-radius: 50%;
+        object-fit: cover;
     }
 `

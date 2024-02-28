@@ -15,11 +15,13 @@ export default function App() {
         password: '',
     });
     const [menuVisible, setMenuVisible] = useState(false);
+    const [loginData, setLoginData] = useState({});
 
     return (
         <BrowserRouter>
             <GlobalStyle />
-            <UserContext.Provider value={{ formData, setFormData, menuVisible, setMenuVisible }}>
+            <UserContext.Provider value={{
+                formData, setFormData, menuVisible, setMenuVisible, loginData, setLoginData }}>
             <TopMenu />
             <Bottom />
             <Routes>

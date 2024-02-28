@@ -7,7 +7,7 @@ import { postLogin } from '../services/services';
 import { ThreeDots } from 'react-loader-spinner'
 
 export default function LoginPage() {
-    const { formData, setFormData, setMenuVisible } = useContext(UserContext);
+    const { formData, setFormData, setMenuVisible, setLoginData } = useContext(UserContext);
     const navigate = useNavigate();
     const [submitAvailable, setSubmitAvailable] = useState(true);
 
@@ -17,10 +17,14 @@ export default function LoginPage() {
 
     const handleForm = (e) => {
         e.preventDefault();
+        if (!submitAvailable) return;
         setSubmitAvailable(false);
         const promise = postLogin(formData);
         promise
-            .then(() => navigate('/habits'))
+            .then(res => {
+                setLoginData(res.data);
+                navigate('/habits');
+            })
             .catch(() => {
                 alert("Login failed.");
                 setSubmitAvailable(true);
