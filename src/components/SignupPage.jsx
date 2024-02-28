@@ -17,11 +17,11 @@ export default function SignupPage() {
     
     const validInputs = () => {
         if(formData.password.length < 8) {
-            alert("password must have at least 8 characters");
+            alert("Password must have at least 8 characters");
             return false;
         }
         if (!/^(ftp|http|https):\/\/[^ "]+$/.test(formData.image) && !/^www\.[^ "]+$/.test(formData.image)) {
-            alert("picture must be a valid URL")
+            alert("Picture must be a valid URL")
             return false;
         }
         return true;

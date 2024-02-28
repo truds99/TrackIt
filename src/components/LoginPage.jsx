@@ -1,9 +1,9 @@
 import logo from '../assets/logo.svg'
 import styled from 'styled-components'
-import { useContext, useEffect, useState } from "react";
-import UserContext from "../contexts/UserContext";
+import { useContext, useEffect, useState } from "react"
+import UserContext from "../contexts/UserContext"
 import { Link, useNavigate } from 'react-router-dom'
-import { postLogin } from '../services/services';
+import { postLogin } from '../services/services'
 import { ThreeDots } from 'react-loader-spinner'
 
 export default function LoginPage() {

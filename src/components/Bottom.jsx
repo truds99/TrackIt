@@ -11,7 +11,7 @@ export default function Bottom() {
             <Link to='/habits'>Habits</Link>
             <Link to='/habits'>
                 <div>
-                    Hoje
+                    Today
                 </div>
             </Link>
             <Link to='/habits'>History</Link>

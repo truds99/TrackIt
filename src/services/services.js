@@ -11,4 +11,28 @@ function postSignup(body) {
     return promise;
 }
 
-export { postLogin, postSignup };
+function getHabits(token) {
+    const headers = {
+        Authorization: `Bearer ${token}`
+    };
+    const promise = axios.get(`${URL}/habits`, { headers });
+    return promise;
+}
+
+function deleteRequest(token, id) {
+    const headers = {
+        Authorization: `Bearer ${token}`
+    };
+    const promise = axios.delete(`${URL}/habits/${id}`, { headers });
+    return promise;
+}
+
+function postHabit(token, body) {
+    const headers = {
+        Authorization: `Bearer ${token}`
+    };
+    const promise = axios.post(`${URL}/habits`, {headers, body});
+    return promise;
+}
+
+export { postLogin, postSignup, getHabits, deleteRequest, postHabit };

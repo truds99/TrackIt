@@ -82,6 +82,7 @@ const GlobalStyle = createGlobalStyle`
     }
     :focus {
         font-family: "Lexend Deca", sans-serif;
+        outline: none;
     }
     blockquote:before, blockquote:after,
     q:before, q:after {
