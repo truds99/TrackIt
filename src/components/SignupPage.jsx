@@ -1,28 +1,41 @@
 import logo from '../assets/logo.svg'
 import styled from 'styled-components'
-import { useContext, useEffect, useState } from "react";
-import UserContext from "../contexts/UserContext";
 import { Link, useNavigate } from 'react-router-dom'
-import { postLogin } from '../services/services';
+import { postSignup } from '../services/services';
+import { useState } from 'react';
 import { ThreeDots } from 'react-loader-spinner'
 
-export default function LoginPage() {
-    const { formData, setFormData, setMenuVisible } = useContext(UserContext);
-    const navigate = useNavigate();
+export default function SignupPage() {
     const [submitAvailable, setSubmitAvailable] = useState(true);
-
-    useEffect(() => {
-        setMenuVisible(false);
-    }, [])
+    const [formData, setFormData] = useState({
+        email: "",
+        name: "",
+        image: "",
+        password: ""
+    })
+    const navigate = useNavigate();
+    
+    const validInputs = () => {
+        if(formData.password.length < 8) {
+            alert("password must have at least 8 characters");
+            return false;
+        }
+        if (!/^(ftp|http|https):\/\/[^ "]+$/.test(formData.image) && !/^www\.[^ "]+$/.test(formData.image)) {
+            alert("picture must be a valid URL")
+            return false;
+        }
+        return true;
+    }
 
     const handleForm = (e) => {
         e.preventDefault();
         setSubmitAvailable(false);
-        const promise = postLogin(formData);
+        if (!validInputs()) return;
+        const promise = postSignup(formData);
         promise
-            .then(() => navigate('/habits'))
+            .then(() => navigate('/'))
             .catch(() => {
-                alert("Login failed.");
+                alert("Signup failed.");
                 setSubmitAvailable(true);
             })
     }
@@ -34,14 +47,12 @@ export default function LoginPage() {
         }));
     };
 
-
     return (
-        <LoginPageStyled $submitAvailable={submitAvailable}>
+        <SignupPageStyled $submitAvailable={submitAvailable}>
             <img src={logo} />
             <form onSubmit={handleForm}>
                 <input
                     type="email"
-                    id="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
@@ -51,7 +62,6 @@ export default function LoginPage() {
                 <br />
                 <input
                     type="password"
-                    id="password"
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
@@ -59,15 +69,33 @@ export default function LoginPage() {
                     required
                 />
                 <br />
-                <button type="submit">Log-in</button>
+                <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder='name'
+                    required
+                />
+                <br />
+                <input
+                    type="text"
+                    name="image"
+                    value={formData.image}
+                    onChange={handleChange}
+                    placeholder='profile picture'
+                    required
+                />
+                <br />
+                <button type="submit">Sign-up</button>
                 <ThreeDots color='white' height='45px' /> 
             </form>
-            <Link to='/signup'>No account yet? Register now.</Link>
-        </LoginPageStyled>
+            <Link to='/'>Already registered? Log-in.</Link>
+        </SignupPageStyled>
     )
 }
 
-const LoginPageStyled = styled.div`
+const SignupPageStyled = styled.div`
     display: flex;
     flex-direction: column;
     padding: 0 8%;
@@ -94,7 +122,6 @@ const LoginPageStyled = styled.div`
         outline: none;
         background-color: ${props => props.$submitAvailable ? 'white' : '#d4d4d4'};
     }
-
     & img {
         margin-bottom: 33px;
     }
@@ -118,12 +145,12 @@ const LoginPageStyled = styled.div`
         border: none;
         color: white;
         background-color: #52B6FF;
-        opacity: ${props => props.$submitAvailable ? '1' : '0.7'};
         font-size: 21px;
         font-weight: 400;
         text-align: center;
         cursor: ${props => props.$submitAvailable ? 'pointer' : 'initial'};
         margin-bottom: 25px;
+        opacity: ${props => props.$submitAvailable ? '1' : '0.7'};
     }
 
     & a{
@@ -134,7 +161,7 @@ const LoginPageStyled = styled.div`
 
     & form div {
         position: absolute;
-        bottom: 24px;
+        bottom: 25px;
         left: 50%;
         transform: translateX(-50%);
         max-width: 100%;

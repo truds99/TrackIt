@@ -2,7 +2,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import UserContext from "../contexts/UserContext"
 import LoginPage from './LoginPage'
 import { createGlobalStyle } from 'styled-components'
-import { useState } from "react";
+import { useState } from "react"
+import SignupPage from './SignupPage'
+import HabitsPage from './HabitsPage/HabitsPage'
+import TopMenu from './TopMenu'
+import Bottom from './Bottom'
 
 
 export default function App() {
@@ -10,13 +14,18 @@ export default function App() {
         email: '',
         password: '',
     });
+    const [menuVisible, setMenuVisible] = useState(false);
 
     return (
         <BrowserRouter>
             <GlobalStyle />
-            <UserContext.Provider value={{ formData, setFormData }}>
+            <UserContext.Provider value={{ formData, setFormData, menuVisible, setMenuVisible }}>
+            <TopMenu />
+            <Bottom />
             <Routes>
                 <Route path='/' element={<LoginPage />} />
+                <Route path='/signup' element={<SignupPage />} />
+                <Route path='/habits' element={<HabitsPage />} />
             </Routes>
             </UserContext.Provider>
         </BrowserRouter>
@@ -67,6 +76,9 @@ const GlobalStyle = createGlobalStyle`
         quotes: none;
     }
     ::placeholder{
+        font-family: "Lexend Deca", sans-serif;
+    }
+    :focus {
         font-family: "Lexend Deca", sans-serif;
     }
     blockquote:before, blockquote:after,
