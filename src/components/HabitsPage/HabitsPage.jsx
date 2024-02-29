@@ -61,6 +61,14 @@ export default function HabitsPage() {
 
 function ButtonWeekday({ letter, selected, isAdding, body, setBody, day }) {
     const [isSelected, setIsSelected] = useState(selected);
+    
+    useEffect (() => {
+        if (body) {
+            if(!body.days.length) {
+                setIsSelected(false);
+            }
+        }
+    }, [body])
 
     function toggleSelect() {
         if (isAdding) {
@@ -68,11 +76,16 @@ function ButtonWeekday({ letter, selected, isAdding, body, setBody, day }) {
             if (!isSelected) {
                 setBody({...body, days: [...body.days, day]})
             }
+            else {
+                setBody({...body, days: body.days.filter(elm => elm !== day)})
+            }
         }
     }
 
     return (
-        <ButtonWeekdayStyled $color={isSelected} $isAdding={isAdding} onClick={toggleSelect} >{letter}</ButtonWeekdayStyled>
+        <ButtonWeekdayStyled $color={isSelected} $isAdding={isAdding} onClick={toggleSelect}>
+            {letter}
+        </ButtonWeekdayStyled>
     )
 }
 
@@ -81,10 +94,12 @@ const HabitsPageStyled = styled.div`
     flex-direction: column;
     padding: 92px 8% 112px 8%;
     max-width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     justify-content: flex-start;
     align-items: center;
     background-color: #cfcfcf;
+    height: min-content;
+    
     
     & h1 {
         color: #126BA5;
@@ -108,7 +123,7 @@ const HabitsPageStyled = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 30px;
+        margin-top: 15px;
     }
 
     & button {

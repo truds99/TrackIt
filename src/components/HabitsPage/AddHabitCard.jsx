@@ -4,7 +4,13 @@ import { ButtonWeekday } from "./HabitsPage"
 import { postHabit } from "../../services/services"
 import UserContext from "../../contexts/UserContext"
 
-export default function AddHabitCard({ showAddCard, setShowAddCard, body, setBody, setShouldGetHabits }) {
+export default function AddHabitCard({ 
+    showAddCard, 
+    setShowAddCard,
+    body, 
+    setBody, 
+    setShouldGetHabits }) {
+        
     const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
     const [submitAvailable, setSubmitAvailable] = useState(true)
     const { loginData } = useContext(UserContext)
@@ -31,7 +37,12 @@ export default function AddHabitCard({ showAddCard, setShowAddCard, body, setBod
 
     return (
         <AddHabitCardStyled $showAddCard={showAddCard}>
-            <input type='text' placeholder='habit' value={body.name} onChange={e => setBody({...body, name: e.target.value})} />
+            <input 
+                type='text' 
+                placeholder='habit' 
+                value={body.name} 
+                onChange={e => setBody({...body, name: e.target.value})} 
+            />
             <div>
                 {weekdays.map((elm, idx) => <ButtonWeekday 
                     letter={elm}
