@@ -31,11 +31,13 @@ const BottomStyled = styled.div`
     height: 70px;
     background-color: white;
     display: ${props => props.$menuVisible ? 'flex' : 'none' };
+    overflow-y: visible;
 
     & a {
         font-size: 18px;
         font-weight: 400;
         color: #52B6FF;
+        cursor: pointer;
     }
 
     & a:hover {
@@ -51,9 +53,12 @@ const BottomStyled = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-        position: fixed;
+       /* position: fixed;
         left: calc(50vw - 45.5px);
-        bottom: 10px;
+        bottom: 10px; */
+        cursor: pointer;
+        z-index: 3;
+        margin-bottom: 35px;
     }
 
 `
