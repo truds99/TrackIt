@@ -38,6 +38,10 @@ const BottomStyled = styled.div`
         color: #52B6FF;
     }
 
+    & a:hover {
+        filter: brightness(0.7);
+    }
+
     & > a > div {
         background-color: #52B6FF;
         color: white;

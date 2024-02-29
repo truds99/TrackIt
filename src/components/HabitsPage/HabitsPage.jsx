@@ -18,21 +18,9 @@ export default function HabitsPage() {
 
     useEffect (() => {
         setMenuVisible(true);
-        setMyHabits([
-            {
-                id: 1,
-                name: "Nome do hábito",
-                days: [1, 3, 5]
-            },
-            {
-                id: 2,
-                name: "Nome do hábito 2",
-                days: [1, 3, 4, 6]
-            }
-        ])
     }, [])
 
-    /* useEffect (() => {
+    useEffect (() => {
         if (shouldGetHabits) {
             const promise = getHabits(loginData.token);
             promise
@@ -42,10 +30,7 @@ export default function HabitsPage() {
                 })
                 .catch(() => alert("error getting habits"))
         }
-        else {
-            alert("error getting habits");
-        }
-    }, [shouldGetHabits, loginData.token]) */
+    }, [shouldGetHabits])
 
     return (
         <HabitsPageStyled $showText={!myHabits.length}>
@@ -58,6 +43,7 @@ export default function HabitsPage() {
                     showAddCard={showAddCard} 
                     setShowAddCard={setShowAddCard} 
                     body={body} setBody={setBody}
+                    setShouldGetHabits={setShouldGetHabits}
                 />
                 {myHabits && myHabits.map(elm => (
                     <HabitCard 
@@ -77,7 +63,6 @@ function ButtonWeekday({ letter, selected, isAdding, body, setBody, day }) {
     const [isSelected, setIsSelected] = useState(selected);
 
     function toggleSelect() {
-        console.log(body);
         if (isAdding) {
             setIsSelected(!isSelected);
             if (!isSelected) {
@@ -139,13 +124,17 @@ const HabitsPageStyled = styled.div`
         padding-bottom: 35px;
     }
 
+    & button:hover {
+        filter: brightness(0.7);
+    }
+
     & p {
         font-size: 18px;
         font-weight: 400;
         color: #666666;
         text-align: left;
         width: 100%;
-        margin-top: 30px;
+        margin-top: 8px;
         display: ${props => props.$showText ? 'initial' : 'none'};
     }
 `
@@ -162,6 +151,10 @@ const ButtonWeekdayStyled = styled.div`
     justify-content: center;
     align-items: center;
     cursor: ${props => props.$isAdding ? 'pointer' : 'initial'};
+
+    &:hover {
+        filter: ${props => props.$isAdding ? 'brightness(0.7)' : 'initial'};
+    }
 `
 
 export { ButtonWeekday };

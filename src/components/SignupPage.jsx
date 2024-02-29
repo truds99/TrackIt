@@ -154,6 +154,10 @@ const SignupPageStyled = styled.div`
         opacity: ${props => props.$submitAvailable ? '1' : '0.7'};
     }
 
+    & button:hover {
+        filter: brightness(0.7);
+    }
+
     & a{
         font-size: 14px;
         color: #52B6FF;

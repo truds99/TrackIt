@@ -12,26 +12,32 @@ function postSignup(body) {
 }
 
 function getHabits(token) {
-    const headers = {
-        Authorization: `Bearer ${token}`
-    };
-    const promise = axios.get(`${URL}/habits`, { headers });
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }
+    const promise = axios.get(`${URL}/habits`, config);
     return promise;
 }
 
 function deleteRequest(token, id) {
-    const headers = {
-        Authorization: `Bearer ${token}`
-    };
-    const promise = axios.delete(`${URL}/habits/${id}`, { headers });
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }
+    const promise = axios.delete(`${URL}/habits/${id}`, config);
     return promise;
 }
 
 function postHabit(token, body) {
-    const headers = {
-        Authorization: `Bearer ${token}`
-    };
-    const promise = axios.post(`${URL}/habits`, {headers, body});
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }
+    const promise = axios.post(`${URL}/habits`, body, config);
     return promise;
 }
 

@@ -4,7 +4,7 @@ import { ButtonWeekday } from "./HabitsPage"
 import { postHabit } from "../../services/services"
 import UserContext from "../../contexts/UserContext"
 
-export default function AddHabitCard({ showAddCard, setShowAddCard, body, setBody }) {
+export default function AddHabitCard({ showAddCard, setShowAddCard, body, setBody, setShouldGetHabits }) {
     const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
     const [submitAvailable, setSubmitAvailable] = useState(true)
     const { loginData } = useContext(UserContext)
@@ -20,7 +20,11 @@ export default function AddHabitCard({ showAddCard, setShowAddCard, body, setBod
         }
         const promise = postHabit(loginData.token, body);
         promise
-            .then(() => console.log(body))
+            .then(() => {
+                setBody({ name: '', days: [] });
+                setShowAddCard(false);
+                setShouldGetHabits(true);
+            })
             .catch(() => alert("error sending habit"))
     }
     
@@ -60,6 +64,7 @@ const AddHabitCardStyled = styled.div`
     border: none;
     margin-bottom: 10px;
     position: relative;
+    border-radius: 5px;
 
     & > div:nth-child(2) {
         display: flex;
@@ -94,6 +99,10 @@ const AddHabitCardStyled = styled.div`
         color: #52B6FF;
         font-weight: 400;
         cursor: pointer;
+    }
+
+    h6:hover {
+        filter: brightness(0.7);
     }
 
     & button {

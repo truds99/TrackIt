@@ -130,6 +130,10 @@ const LoginPageStyled = styled.div`
         margin-bottom: 25px;
     }
 
+    & button:hover {
+        filter: brightness(0.7);
+    }
+
     & a{
         font-size: 14px;
         color: #52B6FF;

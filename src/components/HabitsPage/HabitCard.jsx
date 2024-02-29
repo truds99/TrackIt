@@ -47,7 +47,8 @@ const HabitCardStyled = styled.div`
     border: none;
     margin-bottom: 10px;
     position: relative;
-    height: min-content; 
+    height: min-content;
+    border-radius: 5px;
 
     & h2 {
         font-size: 20px;
