@@ -27,6 +27,7 @@ export default function HabitCard({ habitName, days, idHabit, setShouldGetHabits
                     key={idx}
                     selected={days.includes(idx)}
                     isAdding={false}
+                    submitAvailable={false}
                 />)}
             </div>
             <ion-icon onClick={deleteHabit} name="trash-outline"></ion-icon>

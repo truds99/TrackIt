@@ -59,7 +59,7 @@ export default function HabitsPage() {
     )   
 }
 
-function ButtonWeekday({ letter, selected, isAdding, body, setBody, day }) {
+function ButtonWeekday({ letter, selected, isAdding, body, setBody, day, submitAvailable }) {
     const [isSelected, setIsSelected] = useState(selected);
     
     useEffect (() => {
@@ -72,18 +72,25 @@ function ButtonWeekday({ letter, selected, isAdding, body, setBody, day }) {
 
     function toggleSelect() {
         if (isAdding) {
-            setIsSelected(!isSelected);
-            if (!isSelected) {
-                setBody({...body, days: [...body.days, day]})
-            }
-            else {
-                setBody({...body, days: body.days.filter(elm => elm !== day)})
+            if (submitAvailable){
+                setIsSelected(!isSelected);
+                if (!isSelected) {
+                    setBody({...body, days: [...body.days, day]})
+                }
+                else {
+                    setBody({...body, days: body.days.filter(elm => elm !== day)})
+                }
             }
         }
     }
 
     return (
-        <ButtonWeekdayStyled $color={isSelected} $isAdding={isAdding} onClick={toggleSelect}>
+        <ButtonWeekdayStyled 
+            $color={isSelected} 
+            $isAdding={isAdding} 
+            $submitAvailable={submitAvailable} 
+            onClick={toggleSelect}
+        >
             {letter}
         </ButtonWeekdayStyled>
     )
@@ -165,10 +172,10 @@ const ButtonWeekdayStyled = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: ${props => props.$isAdding ? 'pointer' : 'initial'};
+    cursor: ${props => props.$submitAvailable ? 'pointer' : 'initial'};
 
     &:hover {
-        filter: ${props => props.$isAdding ? 'brightness(0.7)' : 'initial'};
+        filter: ${props => props.$isAdding && props.$submitAvailable ? 'brightness(0.7)' : 'initial'};
     }
 `
 
