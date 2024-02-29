@@ -107,15 +107,6 @@ const HabitsPageStyled = styled.div`
     background-color: #cfcfcf;
     height: min-content;
     
-    
-    & h1 {
-        color: #126BA5;
-        font-size: 23px;
-        font-weight: 400;
-        min-height: 26px;
-        text-align: left;
-    }
-
     &>div:nth-child(1) {
         width: 100%;
         max-width: 100%;

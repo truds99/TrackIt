@@ -41,4 +41,42 @@ function postHabit(token, body) {
     return promise;
 }
 
-export { postLogin, postSignup, getHabits, deleteRequest, postHabit };
+function getTodayHabits(token) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }
+    const promise = axios.get(`${URL}/habits/today`, config);
+    return promise;
+}
+
+function postCheck(token, id) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }
+    const promise = axios.post(`${URL}/habits/${id}/check`, {}, config);
+    return promise;
+}
+
+function postUncheck(token, id) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }
+    const promise = axios.post(`${URL}/habits/${id}/uncheck`, {}, config);
+    return promise;
+}
+
+
+export { postLogin, 
+    postSignup, 
+    getHabits, 
+    deleteRequest, 
+    postHabit, 
+    getTodayHabits, 
+    postCheck, 
+    postUncheck };

@@ -2,11 +2,13 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import UserContext from "../contexts/UserContext"
 import LoginPage from './LoginPage'
 import { createGlobalStyle } from 'styled-components'
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import SignupPage from './SignupPage'
 import HabitsPage from './HabitsPage/HabitsPage'
 import TopMenu from './TopMenu'
 import Bottom from './Bottom'
+import TodayPage from './TodayPage/TodayPage'
+import { getTodayHabits } from '../services/services'
 
 
 export default function App() {
@@ -15,19 +17,39 @@ export default function App() {
         password: '',
     });
     const [menuVisible, setMenuVisible] = useState(false);
-    const [loginData, setLoginData] = useState({});
+    const [loginData, setLoginData] = useState('');
+    const [todayData, setTodayData] = useState([]);
+    const [progress, setProgress] = useState(0);
+
+    useEffect(() => {
+        if (loginData) {
+            const promise = getTodayHabits(loginData.token)
+            promise
+                .then(res => setTodayData(res.data))
+                .catch(() => alert("error getting today's data"))
+        }
+    }, [loginData])
 
     return (
         <BrowserRouter>
             <GlobalStyle />
             <UserContext.Provider value={{
-                formData, setFormData, menuVisible, setMenuVisible, loginData, setLoginData }}>
+                formData,
+                setFormData, 
+                menuVisible, 
+                setMenuVisible, 
+                loginData, 
+                setLoginData,
+                todayData,
+                setTodayData
+            }}>
             <TopMenu />
             <Bottom />
             <Routes>
                 <Route path='/' element={<LoginPage />} />
                 <Route path='/signup' element={<SignupPage />} />
                 <Route path='/habits' element={<HabitsPage />} />
+                <Route path='/today' element={<TodayPage />} />
             </Routes>
             </UserContext.Provider>
         </BrowserRouter>
@@ -54,6 +76,15 @@ const GlobalStyle = createGlobalStyle`
 	border: 0;
 	font-size: 100%;
 	vertical-align: baseline;
+    }
+
+
+    h1 {
+        color: #126BA5;
+        font-size: 23px;
+        font-weight: 400;
+        min-height: 26px;
+        text-align: left;
     }
     /* HTML5 display-role reset for older browsers */
     article, aside, details, figcaption, figure, 

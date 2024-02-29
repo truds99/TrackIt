@@ -9,7 +9,7 @@ export default function Bottom() {
     return (
         <BottomStyled $menuVisible={menuVisible} >
             <Link to='/habits'>Habits</Link>
-            <Link to='/habits'>
+            <Link to='/today'>
                 <div>
                     Today
                 </div>
@@ -53,11 +53,7 @@ const BottomStyled = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-       /* position: fixed;
-        left: calc(50vw - 45.5px);
-        bottom: 10px; */
         cursor: pointer;
-        z-index: 3;
         margin-bottom: 35px;
     }
 

@@ -34,7 +34,10 @@ export default function AddHabitCard({
                 setShouldGetHabits(true);
                 setSubmitAvailable(true);
             })
-            .catch(() => alert("error sending habit"))
+            .catch(() => {
+                alert("error sending habit")
+                setSubmitAvailable(true);
+            })
     }
     
 
