@@ -1,14 +1,11 @@
 import styled from "styled-components"
 import UserContext from "../../contexts/UserContext";
 import { useContext, useEffect, useState } from "react";
-import { getHabits } from '../../services/services'
 import HabitCard from './HabitCard'
 import AddHabitCard from "./AddHabitCard";
 
 export default function HabitsPage() {
-    const { setMenuVisible, loginData } = useContext(UserContext);
-    const [myHabits, setMyHabits] = useState('');
-    const [shouldGetHabits, setShouldGetHabits] = useState(true);
+    const { setMenuVisible, loginData, setShouldGetHabits, myHabits } = useContext(UserContext);
     const [showAddCard, setShowAddCard] = useState(false);
     const [body, setBody] = useState(
         {
@@ -19,18 +16,6 @@ export default function HabitsPage() {
     useEffect (() => {
         setMenuVisible(true);
     }, [])
-
-    useEffect (() => {
-        if (shouldGetHabits) {
-            const promise = getHabits(loginData.token);
-            promise
-                .then(res => {
-                    setMyHabits(res.data);
-                    setShouldGetHabits(false)
-                })
-                .catch(() => alert("error getting habits"))
-        }
-    }, [shouldGetHabits])
 
     return (
         <HabitsPageStyled $showText={!myHabits.length}>

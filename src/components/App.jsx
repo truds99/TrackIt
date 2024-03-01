@@ -8,8 +8,7 @@ import HabitsPage from './HabitsPage/HabitsPage'
 import TopMenu from './TopMenu'
 import Bottom from './Bottom'
 import TodayPage from './TodayPage/TodayPage'
-import { getTodayHabits } from '../services/services'
-
+import { getTodayHabits, getHabits } from '../services/services'
 
 export default function App() {
     const [formData, setFormData] = useState({
@@ -20,6 +19,20 @@ export default function App() {
     const [loginData, setLoginData] = useState('')
     const [todayData, setTodayData] = useState([])
     const [todayDone, setTodayDone] = useState(0)
+    const [myHabits, setMyHabits] = useState('');
+    const [shouldGetHabits, setShouldGetHabits] = useState(true);
+
+    useEffect(() => {
+        if (shouldGetHabits && loginData.token) {
+            const promise = getHabits(loginData.token);
+            promise
+                .then(res => {
+                    setMyHabits(res.data);
+                    setShouldGetHabits(false)
+                })
+                .catch(() => alert("error getting habits"))
+        }
+    }, [shouldGetHabits, loginData])
 
     useEffect(() => {
         if (loginData) {
@@ -28,7 +41,7 @@ export default function App() {
                 .then(res => setTodayData(res.data))
                 .catch(() => alert("error getting today's data"))
         }
-    }, [loginData])
+    }, [loginData, myHabits])
 
     useEffect(() => {
         if (todayData.length) {
@@ -40,16 +53,13 @@ export default function App() {
         <BrowserRouter>
             <GlobalStyle />
             <UserContext.Provider value={{
-                formData,
-                setFormData, 
-                menuVisible, 
-                setMenuVisible, 
-                loginData, 
-                setLoginData,
-                todayData,
-                setTodayData,
-                todayDone, 
-                setTodayDone
+                formData, setFormData, 
+                menuVisible, setMenuVisible, 
+                loginData, setLoginData,
+                todayData, setTodayData,
+                todayDone, setTodayDone,
+                myHabits, setMyHabits,
+                shouldGetHabits, setShouldGetHabits
             }}>
             <TopMenu />
             <Bottom />
