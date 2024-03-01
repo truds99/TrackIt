@@ -6,13 +6,11 @@ import TodayCard from "./TodayCard"
 import { useNavigate } from 'react-router-dom'
 
 export default function TodayPage() {
-    const nowDate = dayjs().format('dddd, DD/MM')
-    const { todayData, loginData, todayDone, setMenuVisible } = useContext(UserContext)
+    const nowDate = dayjs().format('dddd, DD/MM');
+    const { todayData, loginData, todayDone, setMenuVisible } = useContext(UserContext);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        setMenuVisible(true);
-    }, [])
+    useEffect(() => setMenuVisible(true), []);
     
     useEffect(() => {
         if (!loginData.token) {

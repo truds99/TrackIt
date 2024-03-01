@@ -5,35 +5,42 @@ import { useContext, useState } from "react"
 import { postCheck, postUncheck } from "../../services/services"
 
 export default function TodayCard({name, current, record, done, id}) {
-    const { loginData, todayData, todayDone, setTodayDone } = useContext(UserContext)
-    const [isDone, setIsDone] = useState(done)
-    const [dynamicCurrent, setDynamicCurrent] = useState(current)
-    const [dynamicRecord, setDynamicRecord] = useState(record)
+    const { loginData, todayDone, setTodayDone } = useContext(UserContext);
+    const [isDone, setIsDone] = useState(done);
+    const [dynamicCurrent, setDynamicCurrent] = useState(current);
+    const [dynamicRecord, setDynamicRecord] = useState(record);
+    const [isAvailable, setIsAvailable] = useState(true);
 
     function toggleDone () {
-        if (isDone) {
-            const promise = postUncheck(loginData.token, id)
-            promise
-                .then(() => {
-                    setIsDone(false)
-                    setDynamicCurrent(dynamicCurrent - 1)
-                    setTodayDone(todayDone - 1)
-                    if (dynamicCurrent === dynamicRecord) setDynamicRecord(dynamicRecord - 1)
-                })
-                .catch(() => alert("error unchecking habit"))
-        }
-        else {
-            const promise = postCheck(loginData.token, id)
-            promise
-                .then(() => {
-                    setIsDone(true)
-                    setDynamicCurrent(dynamicCurrent + 1)
-                    setTodayDone(todayDone + 1)
-                    if (dynamicCurrent === dynamicRecord) setDynamicRecord(dynamicRecord + 1);
-                })
-                .catch(() => alert("error checking habit"))
+        if (isAvailable) {
+            setIsAvailable(false);
+            if (isDone) {
+                const promise = postUncheck(loginData.token, id);
+                promise
+                    .then(() => {
+                        setIsDone(false);
+                        setDynamicCurrent(dynamicCurrent - 1);
+                        setTodayDone(todayDone - 1);
+                        if (dynamicCurrent === dynamicRecord) setDynamicRecord(dynamicRecord - 1);
+                        
+                    })
+                    .catch(() => alert("error unchecking habit"));
+            }
+            else {
+                const promise = postCheck(loginData.token, id);
+                promise
+                    .then(() => {
+                        setIsDone(true);
+                        setDynamicCurrent(dynamicCurrent + 1);
+                        setTodayDone(todayDone + 1);
+                        if (dynamicCurrent === dynamicRecord) setDynamicRecord(dynamicRecord + 1);
+                    })
+                    .catch(() => alert("error checking habit"));
+            }
+            setIsAvailable(true);
         }
     }
+    
 
     return (
         <TodayCardStyled $colorBG={isDone} $isRecord={dynamicCurrent >= dynamicRecord}>

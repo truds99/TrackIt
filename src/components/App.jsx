@@ -11,16 +11,15 @@ import TodayPage from './TodayPage/TodayPage'
 import HistoryPage from './HistoryPage/HistoryPage'
 import { getTodayHabits, getHabits } from '../services/services'
 
-
 export default function App() {
     const [formData, setFormData] = useState({
         email: '',
-        password: '',
+        password: '',   
     });
-    const [menuVisible, setMenuVisible] = useState(false)
-    const [loginData, setLoginData] = useState('')
-    const [todayData, setTodayData] = useState([])
-    const [todayDone, setTodayDone] = useState(0)
+    const [menuVisible, setMenuVisible] = useState(false);
+    const [loginData, setLoginData] = useState('');
+    const [todayData, setTodayData] = useState([]);
+    const [todayDone, setTodayDone] = useState(0);
     const [myHabits, setMyHabits] = useState('');
     const [shouldGetHabits, setShouldGetHabits] = useState(true);
 
@@ -30,24 +29,24 @@ export default function App() {
             promise
                 .then(res => {
                     setMyHabits(res.data);
-                    setShouldGetHabits(false)
+                    setShouldGetHabits(false);
                 })
-                .catch(() => alert("error getting habits"))
+                .catch(() => alert("error getting habits"));
         }
     }, [shouldGetHabits, loginData])
 
     useEffect(() => {
         if (loginData) {
-            const promise = getTodayHabits(loginData.token)
+            const promise = getTodayHabits(loginData.token);
             promise
                 .then(res => setTodayData(res.data))
                 .catch(() => alert("error getting today's data"))
         }
-    }, [loginData, myHabits, todayDone])
+    }, [loginData, myHabits, todayDone]);
 
     useEffect(() => {
         if (todayData.length) {
-            setTodayDone(todayData.reduce((acc, elm) => elm.done ? acc + 1 : acc, 0))
+            setTodayDone(todayData.reduce((acc, elm) => elm.done ? acc + 1 : acc, 0));
         }
     }, [todayData, loginData])
 

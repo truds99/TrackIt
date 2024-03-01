@@ -1,8 +1,8 @@
 import styled from "styled-components"
-import { deleteRequest } from "../../services/services";
-import { useContext, useState } from "react";
-import UserContext from "../../contexts/UserContext";
-import { ButtonWeekday } from "./HabitsPage";
+import { deleteRequest } from "../../services/services"
+import { useContext } from "react"
+import UserContext from "../../contexts/UserContext"
+import { ButtonWeekday } from "./HabitsPage"
 
 
 export default function HabitCard({ habitName, days, idHabit, setShouldGetHabits }) {
@@ -14,7 +14,7 @@ export default function HabitCard({ habitName, days, idHabit, setShouldGetHabits
             const promise = deleteRequest(loginData.token, idHabit);
             promise
                 .then(() => setShouldGetHabits(true))
-                .catch(() => alert("error deleting habit"));
+                .catch(() => alert("error deleting habit"))
         }
     }
     

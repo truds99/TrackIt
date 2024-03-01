@@ -1,8 +1,8 @@
 import logo from '../assets/logo.svg'
 import styled from 'styled-components'
 import { Link, useNavigate } from 'react-router-dom'
-import { postSignup } from '../services/services';
-import { useState } from 'react';
+import { postSignup } from '../services/services'
+import { useState } from 'react'
 import { ThreeDots } from 'react-loader-spinner'
 
 export default function SignupPage() {
@@ -12,7 +12,7 @@ export default function SignupPage() {
         name: "",
         image: "",
         password: ""
-    })
+    });
     const navigate = useNavigate();
     
     const validInputs = () => {
@@ -21,7 +21,7 @@ export default function SignupPage() {
             return false;
         }
         if (!/^(ftp|http|https):\/\/[^ "]+$/.test(formData.image) && !/^www\.[^ "]+$/.test(formData.image)) {
-            alert("Picture must be a valid URL")
+            alert("Picture must be a valid URL");
             return false;
         }
         return true;
@@ -36,17 +36,17 @@ export default function SignupPage() {
         promise
             .then(() => navigate('/'))
             .catch(() => {
-                alert("Signup failed.");
-                setSubmitAvailable(true);
+                alert("Signup failed.")
+                setSubmitAvailable(true)
             })
     }
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value } = e.target
         setFormData((prevData) => ({
             ...prevData, [name]: value,
-        }));
-    };
+        }))
+    }
 
     return (
         <SignupPageStyled $submitAvailable={submitAvailable}>

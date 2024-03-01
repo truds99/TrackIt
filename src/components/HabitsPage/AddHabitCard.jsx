@@ -12,30 +12,30 @@ export default function AddHabitCard({
     setBody, 
     setShouldGetHabits }) {
         
-    const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
-    const [submitAvailable, setSubmitAvailable] = useState(true)
-    const { loginData } = useContext(UserContext)
+    const weekdays = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+    const [submitAvailable, setSubmitAvailable] = useState(true);
+    const { loginData } = useContext(UserContext);
 
     const handleSubmit = () => {
         if (!body.name) {
-            alert("the input can't be empty")
-            return
+            alert("the input can't be empty");
+            return;
         }
         if (!body.days.length) {
-            alert("select at least one day")
-            return
+            alert("select at least one day");
+            return;
         }
         setSubmitAvailable(false);
         const promise = postHabit(loginData.token, body);
         promise
             .then(() => {
-                setBody({ name: '', days: [] });
+                setBody({ name: '', days: [] })
                 setShowAddCard(false);
                 setShouldGetHabits(true);
                 setSubmitAvailable(true);
             })
             .catch(() => {
-                alert("error sending habit")
+                alert("error sending habit");
                 setSubmitAvailable(true);
             })
     }

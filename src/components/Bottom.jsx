@@ -1,9 +1,10 @@
 import styled from "styled-components"
-import UserContext from "../contexts/UserContext";
-import { useContext } from "react";
+import UserContext from "../contexts/UserContext"
+import { useContext } from "react"
 import { Link } from 'react-router-dom'
-import { CircularProgressbar } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
+import { CircularProgressbar } from 'react-circular-progressbar'
+import 'react-circular-progressbar/dist/styles.css'
+
 
 export default function Bottom() {
     const { menuVisible, todayDone, todayData } = useContext(UserContext);
@@ -13,7 +14,7 @@ export default function Bottom() {
             <Link to='/habits'>Habits</Link>
             <Link to='/today'>
                 <div>
-                    <CircularProgressbar strokeWidth={10.2} value={todayDone / todayData.length * 100} />
+                    <CircularProgressbar strokeWidth={10.2} value={todayData.length ? todayDone / todayData.length * 100 : 0} />
                     Today
                 </div>
             </Link>

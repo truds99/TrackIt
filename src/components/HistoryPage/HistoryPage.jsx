@@ -2,21 +2,23 @@ import styled from "styled-components"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useContext } from "react"
 import UserContext from "../../contexts/UserContext"
+import Calendar from 'react-calendar'
+
 
 export default function HistoryPage() {
-    const navigate = useNavigate()
-    const { loginData } = useContext(UserContext)
+    const navigate = useNavigate();
+    const { loginData } = useContext(UserContext);
 
     useEffect(() => {
         if (!loginData.token) {
-            navigate('/')
+            navigate('/');
         }
     }, [])
 
     return (
         <HistoryPageStyled>
             <h1>History</h1>
-            <p>Your history soon</p>
+            <Calendar />
         </HistoryPageStyled>
     )
 }
@@ -35,5 +37,30 @@ const HistoryPageStyled = styled.div`
     & h1 {
         width: 100%;
         max-width: 100%;
+        margin-bottom: 11px;
     }
+
+    .react-calendar__navigation__label {
+        max-width: 100%
+    }
+
+     .react-calendar {
+        min-width: 100%
+    }
+
+    & button {
+        cursor: pointer;
+    }
+
+    .react-calendar__navigation {
+        display: flex;
+        height: 22px;
+        margin-bottom: 0.4em;
+    }
+
+    [class*="neighboring"] {
+        color: #929292
+    }
+
+
 `

@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from "styled-components"
 import textLogo from '../assets/textLogo.svg'
-import UserContext from "../contexts/UserContext";
-import { useContext } from "react";
+import UserContext from "../contexts/UserContext"
+import { useContext } from "react"
 
 export default function TopMenu() {
     const { menuVisible, loginData } = useContext(UserContext);

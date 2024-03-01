@@ -1,9 +1,9 @@
 import styled from "styled-components"
-import UserContext from "../../contexts/UserContext";
-import { useContext, useEffect, useState } from "react";
+import UserContext from "../../contexts/UserContext"
+import { useContext, useEffect, useState } from "react"
 import HabitCard from './HabitCard'
-import AddHabitCard from "./AddHabitCard";
-import { useNavigate } from "react-router-dom";
+import AddHabitCard from "./AddHabitCard"
+import { useNavigate } from "react-router-dom"
 
 export default function HabitsPage() {
     const { setShouldGetHabits, myHabits, loginData } = useContext(UserContext);
@@ -13,13 +13,13 @@ export default function HabitsPage() {
         {
             name: '',
             days: []
-        })
+        });
 
     useEffect(() => {   
         if (!loginData.token) {
             navigate('/');
         }
-    }, [])
+    }, []);
 
     return (
         <HabitsPageStyled $showText={!myHabits.length}>
@@ -62,12 +62,12 @@ function ButtonWeekday({ letter, selected, isAdding, body, setBody, day, submitA
     function toggleSelect() {
         if (isAdding) {
             if (submitAvailable){
-                setIsSelected(!isSelected);
+                setIsSelected(!isSelected)
                 if (!isSelected) {
-                    setBody({...body, days: [...body.days, day]})
+                    setBody({...body, days: [...body.days, day]});
                 }
                 else {
-                    setBody({...body, days: body.days.filter(elm => elm !== day)})
+                    setBody({...body, days: body.days.filter(elm => elm !== day)});
                 }
             }
         }

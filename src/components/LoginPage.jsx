@@ -11,32 +11,30 @@ export default function LoginPage() {
     const navigate = useNavigate();
     const [submitAvailable, setSubmitAvailable] = useState(true);
 
-    useEffect(() => {
-        setMenuVisible(false);
-    }, [])  
+    useEffect(() => setMenuVisible(false), []);  
 
     const handleForm = (e) => {
-        e.preventDefault();
-        if (!submitAvailable) return;
-        setSubmitAvailable(false);
-        const promise = postLogin(formData);
+        e.preventDefault()
+        if (!submitAvailable) return
+        setSubmitAvailable(false)
+        const promise = postLogin(formData)
         promise
             .then(res => {
-                setLoginData(res.data);
-                navigate('/today');
+                setLoginData(res.data)
+                navigate('/today')
             })
             .catch(() => {
-                alert("Login failed.");
-                setSubmitAvailable(true);
+                alert("Login failed.")
+                setSubmitAvailable(true)
             })
     }
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value } = e.target
         setFormData((prevData) => ({
             ...prevData, [name]: value,
-        }));
-    };
+        }))
+    }
 
 
     return (
