@@ -7,15 +7,15 @@ import TodayCard from "./TodayCard"
 
 export default function TodayPage() {
     const nowDate = dayjs().format('dddd, DD/MM')
-    const { loginData, todayData, setTodayData } = useContext(UserContext)
-    
-    
-    
+    const { loginData, todayData, setTodayData, todayDone } = useContext(UserContext)
 
     return (
-        <TodayPageStyled>
+        <TodayPageStyled $colorh3={todayDone > 0}>
             <h1>{nowDate}</h1>
-            <h3>Isso aqui vai ser uma variável</h3>
+            {todayDone > 0 ?
+                <h3>{Math.round(todayDone * 100 / todayData.length)}% completed</h3>:
+                <h3>No habits completed yet</h3>
+            }
             <div>
                 {todayData.map((elm, idx) => ( 
                     <TodayCard 
@@ -40,7 +40,7 @@ const TodayPageStyled = styled.div`
     min-height: 100vh;
     justify-content: flex-start;
     align-items: center;
-    background-color: #cfcfcf;
+    background-color: #ebebeb;
     height: min-content;
 
     & > h1 {
@@ -51,6 +51,9 @@ const TodayPageStyled = styled.div`
     & > h3 {
         width: 100%;
         max-width: 100%;
+        font-weight: 400;
+        font-size: 18px;
+        color: ${props => props.$colorh3 ? '#8FC549' : '#BABABA'}
     }
 
     & > div {

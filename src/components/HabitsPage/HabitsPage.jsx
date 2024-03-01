@@ -104,7 +104,7 @@ const HabitsPageStyled = styled.div`
     min-height: 100vh;
     justify-content: flex-start;
     align-items: center;
-    background-color: #cfcfcf;
+    background-color: #ebebeb;
     height: min-content;
     
     &>div:nth-child(1) {

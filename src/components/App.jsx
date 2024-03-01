@@ -16,10 +16,10 @@ export default function App() {
         email: '',
         password: '',
     });
-    const [menuVisible, setMenuVisible] = useState(false);
-    const [loginData, setLoginData] = useState('');
-    const [todayData, setTodayData] = useState([]);
-    const [progress, setProgress] = useState(0);
+    const [menuVisible, setMenuVisible] = useState(false)
+    const [loginData, setLoginData] = useState('')
+    const [todayData, setTodayData] = useState([])
+    const [todayDone, setTodayDone] = useState(0)
 
     useEffect(() => {
         if (loginData) {
@@ -29,6 +29,12 @@ export default function App() {
                 .catch(() => alert("error getting today's data"))
         }
     }, [loginData])
+
+    useEffect(() => {
+        if (todayData.length) {
+            setTodayDone(todayData.reduce((acc, elm) => elm.done ? acc + 1 : acc, 0))
+        }
+    }, [todayData])
 
     return (
         <BrowserRouter>
@@ -41,7 +47,9 @@ export default function App() {
                 loginData, 
                 setLoginData,
                 todayData,
-                setTodayData
+                setTodayData,
+                todayDone, 
+                setTodayDone
             }}>
             <TopMenu />
             <Bottom />

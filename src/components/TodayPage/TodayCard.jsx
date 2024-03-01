@@ -5,7 +5,7 @@ import { useContext, useState } from "react"
 import { postCheck, postUncheck } from "../../services/services"
 
 export default function TodayCard({name, current, record, done, id}) {
-    const { loginData, todayData, setTodayData } = useContext(UserContext)
+    const { loginData, todayData, todayDone, setTodayDone } = useContext(UserContext)
     const [isDone, setIsDone] = useState(done)
     const [dynamicCurrent, setDynamicCurrent] = useState(current)
     const [dynamicRecord, setDynamicRecord] = useState(record)
@@ -17,6 +17,7 @@ export default function TodayCard({name, current, record, done, id}) {
                 .then(() => {
                     setIsDone(false)
                     setDynamicCurrent(dynamicCurrent - 1)
+                    setTodayDone(todayDone - 1)
                     if (dynamicCurrent === dynamicRecord) setDynamicRecord(dynamicRecord - 1)
                 })
                 .catch(() => alert("error unchecking habit"))
@@ -27,6 +28,7 @@ export default function TodayCard({name, current, record, done, id}) {
                 .then(() => {
                     setIsDone(true)
                     setDynamicCurrent(dynamicCurrent + 1)
+                    setTodayDone(todayDone + 1)
                     if (dynamicCurrent === dynamicRecord) setDynamicRecord(dynamicRecord + 1);
                 })
                 .catch(() => alert("error checking habit"))
