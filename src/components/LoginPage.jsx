@@ -13,7 +13,7 @@ export default function LoginPage() {
 
     useEffect(() => {
         setMenuVisible(false);
-    }, [])
+    }, [])  
 
     const handleForm = (e) => {
         e.preventDefault();
@@ -23,7 +23,7 @@ export default function LoginPage() {
         promise
             .then(res => {
                 setLoginData(res.data);
-                navigate('/habits');
+                navigate('/today');
             })
             .catch(() => {
                 alert("Login failed.");

@@ -3,18 +3,22 @@ import UserContext from "../../contexts/UserContext";
 import { useContext, useEffect, useState } from "react";
 import HabitCard from './HabitCard'
 import AddHabitCard from "./AddHabitCard";
+import { useNavigate } from "react-router-dom";
 
 export default function HabitsPage() {
-    const { setMenuVisible, setShouldGetHabits, myHabits } = useContext(UserContext);
+    const { setShouldGetHabits, myHabits, loginData } = useContext(UserContext);
     const [showAddCard, setShowAddCard] = useState(false);
+    const navigate = useNavigate();
     const [body, setBody] = useState(
         {
             name: '',
             days: []
         })
 
-    useEffect (() => {
-        setMenuVisible(true);
+    useEffect(() => {   
+        if (!loginData.token) {
+            navigate('/');
+        }
     }, [])
 
     return (

@@ -1,14 +1,25 @@
 import styled from "styled-components"
 import dayjs from 'dayjs'
-import { getTodayHabits } from "../../services/services"
 import { useEffect, useContext} from "react"
 import UserContext from "../../contexts/UserContext"
 import TodayCard from "./TodayCard"
+import { useNavigate } from 'react-router-dom'
 
 export default function TodayPage() {
     const nowDate = dayjs().format('dddd, DD/MM')
-    const { loginData, todayData, setTodayData, todayDone } = useContext(UserContext)
+    const { todayData, loginData, todayDone, setMenuVisible } = useContext(UserContext)
+    const navigate = useNavigate();
 
+    useEffect(() => {
+        setMenuVisible(true);
+    }, [])
+    
+    useEffect(() => {
+        if (!loginData.token) {
+            navigate('/');
+        }
+    }, [])
+   
     return (
         <TodayPageStyled $colorh3={todayDone > 0}>
             <h1>{nowDate}</h1>

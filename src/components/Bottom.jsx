@@ -17,7 +17,7 @@ export default function Bottom() {
                     Today
                 </div>
             </Link>
-            <Link to='/habits'>History</Link>
+            <Link to='/history'>History</Link>
         </BottomStyled>
     )
 }

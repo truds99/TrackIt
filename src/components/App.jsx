@@ -8,7 +8,9 @@ import HabitsPage from './HabitsPage/HabitsPage'
 import TopMenu from './TopMenu'
 import Bottom from './Bottom'
 import TodayPage from './TodayPage/TodayPage'
+import HistoryPage from './HistoryPage/HistoryPage'
 import { getTodayHabits, getHabits } from '../services/services'
+
 
 export default function App() {
     const [formData, setFormData] = useState({
@@ -47,7 +49,7 @@ export default function App() {
         if (todayData.length) {
             setTodayDone(todayData.reduce((acc, elm) => elm.done ? acc + 1 : acc, 0))
         }
-    }, [todayData])
+    }, [todayData, loginData])
 
     return (
         <BrowserRouter>
@@ -68,6 +70,7 @@ export default function App() {
                 <Route path='/signup' element={<SignupPage />} />
                 <Route path='/habits' element={<HabitsPage />} />
                 <Route path='/today' element={<TodayPage />} />
+                <Route path='/history' element={<HistoryPage />} />
             </Routes>
             </UserContext.Provider>
         </BrowserRouter>
