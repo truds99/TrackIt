@@ -5,7 +5,7 @@ import HabitCard from './HabitCard'
 import AddHabitCard from "./AddHabitCard";
 
 export default function HabitsPage() {
-    const { setMenuVisible, loginData, setShouldGetHabits, myHabits } = useContext(UserContext);
+    const { setMenuVisible, setShouldGetHabits, myHabits } = useContext(UserContext);
     const [showAddCard, setShowAddCard] = useState(false);
     const [body, setBody] = useState(
         {

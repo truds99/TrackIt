@@ -41,7 +41,7 @@ export default function App() {
                 .then(res => setTodayData(res.data))
                 .catch(() => alert("error getting today's data"))
         }
-    }, [loginData, myHabits])
+    }, [loginData, myHabits, todayDone])
 
     useEffect(() => {
         if (todayData.length) {

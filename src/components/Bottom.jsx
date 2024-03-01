@@ -9,7 +9,7 @@ export default function Bottom() {
     const { menuVisible, todayDone, todayData } = useContext(UserContext);
 
     return (
-        <BottomStyled $menuVisible={menuVisible} >
+        <BottomStyled $menuVisible={menuVisible} $isAllDone={todayDone / todayData.length === 1}>
             <Link to='/habits'>Habits</Link>
             <Link to='/today'>
                 <div>
