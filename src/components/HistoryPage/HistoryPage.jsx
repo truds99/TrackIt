@@ -13,8 +13,6 @@ export default function HistoryPage() {
     const [daysDone, setDaysDone] = useState([]);
     const [selectedDate, setSelectedDate] = useState(new Date())
 
-    localStorage.setItem('page', '/history');
-
     useEffect(() => setMenuVisible(true), []);
 
     useEffect(() => {

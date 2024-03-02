@@ -15,8 +15,6 @@ export default function HabitsPage() {
             days: []
         });
 
-    localStorage.setItem('page', '/habits');
-
     useEffect(() => setMenuVisible(true), []);  
 
     useEffect(() => {   

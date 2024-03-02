@@ -16,8 +16,7 @@ export default function LoginPage() {
     useEffect(() => {
         if (localStorage.getItem('user')) {
             setLoginData(JSON.parse(localStorage.getItem('user')));
-            localStorage.getItem('page') ? 
-                navigate(localStorage.getItem('page')) : navigate('/today');
+            navigate('/today');
         }
     }, [])
 

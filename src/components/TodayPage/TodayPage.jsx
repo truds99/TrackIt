@@ -10,8 +10,6 @@ export default function TodayPage() {
     const { todayData, loginData, todayDone, setMenuVisible } = useContext(UserContext);
     const navigate = useNavigate();
 
-    localStorage.setItem('page', '/today');
-
     useEffect(() => setMenuVisible(true), []);
     
     useEffect(() => {

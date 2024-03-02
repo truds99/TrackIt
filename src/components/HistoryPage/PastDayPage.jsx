@@ -10,8 +10,6 @@ export default function PastDayPage() {
     const { pastDay } = useParams();
     const navigate = useNavigate();
 
-    localStorage.setItem('page', `/history/${pastDay}`);
-
     useEffect(() => setMenuVisible(true), []);  
 
     useEffect(() => {
