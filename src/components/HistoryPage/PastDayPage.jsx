@@ -6,9 +6,13 @@ import check from '../../assets/check.svg'
 import uncheck from '../../assets/uncheck.png'
 
 export default function PastDayPage() {
-    const { historyData, loginData } = useContext(UserContext);
+    const { historyData, loginData, setMenuVisible } = useContext(UserContext);
     const { pastDay } = useParams();
     const navigate = useNavigate();
+
+    localStorage.setItem('page', `/history/${pastDay}`);
+
+    useEffect(() => setMenuVisible(true), []);  
 
     useEffect(() => {
         if (!loginData.token) {

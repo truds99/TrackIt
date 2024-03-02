@@ -6,7 +6,7 @@ import AddHabitCard from "./AddHabitCard"
 import { useNavigate } from "react-router-dom"
 
 export default function HabitsPage() {
-    const { setShouldGetHabits, myHabits, loginData } = useContext(UserContext);
+    const { setShouldGetHabits, myHabits, loginData, setMenuVisible } = useContext(UserContext);
     const [showAddCard, setShowAddCard] = useState(false);
     const navigate = useNavigate();
     const [body, setBody] = useState(
@@ -14,6 +14,10 @@ export default function HabitsPage() {
             name: '',
             days: []
         });
+
+    localStorage.setItem('page', '/habits');
+
+    useEffect(() => setMenuVisible(true), []);  
 
     useEffect(() => {   
         if (!loginData.token) {
