@@ -1,27 +1,29 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import UserContext from "../contexts/UserContext"
 import LoginPage from './LoginPage'
-import { createGlobalStyle } from 'styled-components'
-import { useState, useEffect } from "react"
 import SignupPage from './SignupPage'
 import HabitsPage from './HabitsPage/HabitsPage'
 import TopMenu from './TopMenu'
 import Bottom from './Bottom'
 import TodayPage from './TodayPage/TodayPage'
 import HistoryPage from './HistoryPage/HistoryPage'
-import { getTodayHabits, getHabits } from '../services/services'
+import PastDayPage from "./HistoryPage/PastDayPage"
+import { getTodayHabits, getHabits, getHistory } from '../services/services'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { createGlobalStyle } from 'styled-components'
+import { useState, useEffect } from "react"
 
 export default function App() {
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',   
-    });
     const [menuVisible, setMenuVisible] = useState(false);
     const [loginData, setLoginData] = useState('');
     const [todayData, setTodayData] = useState([]);
     const [todayDone, setTodayDone] = useState(0);
     const [myHabits, setMyHabits] = useState('');
     const [shouldGetHabits, setShouldGetHabits] = useState(true);
+    const [historyData, setHistoryData] = useState([]);
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+    });
 
     useEffect(() => {
         if (shouldGetHabits && loginData.token) {
@@ -50,6 +52,15 @@ export default function App() {
         }
     }, [todayData, loginData])
 
+    useEffect(() => {
+        if (loginData) {
+            const promise = getHistory(loginData.token);
+            promise
+                .then(res => setHistoryData(res.data))
+                .catch(() => alert("error getting history"))
+        }
+    }, [loginData])
+
     return (
         <BrowserRouter>
             <GlobalStyle />
@@ -60,7 +71,8 @@ export default function App() {
                 todayData, setTodayData,
                 todayDone, setTodayDone,
                 myHabits, setMyHabits,
-                shouldGetHabits, setShouldGetHabits
+                shouldGetHabits, setShouldGetHabits,
+                historyData, setHistoryData
             }}>
             <TopMenu />
             <Bottom />
@@ -70,6 +82,7 @@ export default function App() {
                 <Route path='/habits' element={<HabitsPage />} />
                 <Route path='/today' element={<TodayPage />} />
                 <Route path='/history' element={<HistoryPage />} />
+                <Route path='/history/:pastDay' element={<PastDayPage />} />
             </Routes>
             </UserContext.Provider>
         </BrowserRouter>

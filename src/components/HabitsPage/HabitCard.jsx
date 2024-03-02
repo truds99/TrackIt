@@ -9,8 +9,8 @@ export default function HabitCard({ habitName, days, idHabit, setShouldGetHabits
     const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
     const { loginData } = useContext(UserContext);
 
-    function deleteHabit() {
-        if (confirm("Do you want delete this habit?")) {
+    const deleteHabit = () => {
+        if (confirm("Do you want to delete this habit?")) {
             const promise = deleteRequest(loginData.token, idHabit);
             promise
                 .then(() => setShouldGetHabits(true))

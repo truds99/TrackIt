@@ -22,9 +22,13 @@ export default function TodayCard({name, current, record, done, id}) {
                         setDynamicCurrent(dynamicCurrent - 1);
                         setTodayDone(todayDone - 1);
                         if (dynamicCurrent === dynamicRecord) setDynamicRecord(dynamicRecord - 1);
+                        setIsAvailable(true);
                         
                     })
-                    .catch(() => alert("error unchecking habit"));
+                    .catch(() => {
+                        alert("error unchecking habit");
+                        setIsAvailable(true);
+                    });
             }
             else {
                 const promise = postCheck(loginData.token, id);
@@ -34,10 +38,13 @@ export default function TodayCard({name, current, record, done, id}) {
                         setDynamicCurrent(dynamicCurrent + 1);
                         setTodayDone(todayDone + 1);
                         if (dynamicCurrent === dynamicRecord) setDynamicRecord(dynamicRecord + 1);
+                        setIsAvailable(true);
                     })
-                    .catch(() => alert("error checking habit"));
+                    .catch(() => {
+                        alert("error checking habit");
+                        setIsAvailable(true);
+                    })
             }
-            setIsAvailable(true);
         }
     }
     

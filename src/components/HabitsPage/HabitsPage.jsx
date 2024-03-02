@@ -59,7 +59,7 @@ function ButtonWeekday({ letter, selected, isAdding, body, setBody, day, submitA
         }
     }, [body])
 
-    function toggleSelect() {
+   const toggleSelect = () => {
         if (isAdding) {
             if (submitAvailable){
                 setIsSelected(!isSelected)

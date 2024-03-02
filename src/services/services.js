@@ -71,6 +71,15 @@ function postUncheck(token, id) {
     return promise;
 }
 
+function getHistory(token) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }
+    const promise = axios.get(`${URL}/habits/history/daily`, config);
+    return promise;
+}
 
 export { postLogin, 
     postSignup, 
@@ -79,4 +88,6 @@ export { postLogin,
     postHabit, 
     getTodayHabits, 
     postCheck, 
-    postUncheck };
+    postUncheck,
+    getHistory 
+};
