@@ -12,7 +12,7 @@ export default function AddHabitCard({
     setBody, 
     setShouldGetHabits }) {
         
-    const weekdays = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+    const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
     const [submitAvailable, setSubmitAvailable] = useState(true);
     const { loginData } = useContext(UserContext);
 
