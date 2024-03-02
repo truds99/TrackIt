@@ -1,21 +1,29 @@
 import styled from 'styled-components'
 import UserContext from '../../contexts/UserContext'
 import { useContext, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import check from '../../assets/check.svg'
 import uncheck from '../../assets/uncheck.png'
 
 export default function PastDayPage() {
-    const { historyData } = useContext(UserContext);
+    const { historyData, loginData } = useContext(UserContext);
     const { pastDay } = useParams();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!loginData.token) {
+            navigate('/');
+        }
+    }, [])
+
     const thisDay = historyData
         .filter(elm => elm.day === pastDay.replace(/(\d{2})-(\d{2})-(\d{4})/, '$1/$2/$3'))[0];
 
     return (
         <PastDayPageStyled>
-            <h1>History {thisDay.day}</h1>
+            <h1>History {thisDay && thisDay.day}</h1>
             <div>
-                {thisDay.habits.map((elm, idx) => (
+                {thisDay && thisDay.habits.map((elm, idx) => (
                     <CardHistory habit={elm.name} isDone={elm.done} key={idx} />
                 ))}
             </div>

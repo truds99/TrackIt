@@ -2,14 +2,18 @@ import styled from "styled-components"
 import textLogo from '../assets/textLogo.svg'
 import UserContext from "../contexts/UserContext"
 import { useContext } from "react"
+import { Link } from "react-router-dom"
 
 export default function TopMenu() {
-    const { menuVisible, loginData } = useContext(UserContext);
-    
+    const { menuVisible, loginData, showLogout, setShowLogout } = useContext(UserContext);
+ 
     return (
-        <TopMenuStyled $menuVisible={menuVisible}>
+        <TopMenuStyled $menuVisible={menuVisible} $showLogout={showLogout}>
             <img src={textLogo} />
-            <img src={loginData.image} />
+            <img src={loginData.image} onClick={() => setShowLogout(!showLogout)} />
+            <Link to='/'>
+                <div onClick={() => localStorage.removeItem('user')}>Logout</div>
+            </Link>
         </TopMenuStyled>
     )
 }
@@ -27,10 +31,31 @@ const TopMenuStyled = styled.div`
     background-color: #126BA5;
     display: ${props => props.$menuVisible ? 'flex' : 'none' };
 
+    
+
     & img:nth-child(2) {
         width: 51px;
         height: 51px;
         border-radius: 50%;
         object-fit: cover;
+        cursor: pointer;
     }
+
+    & a {
+        position: fixed;
+        right: calc(8% + 51px);
+        top:26px;
+        color: #126BA5;
+        background-color: white;
+        height:20px;
+        display: flex;
+        align-items: center;
+        width: 65px;
+        justify-content: center;
+        display: ${props => props.$showLogout ? 'flex' : 'none' };
+        font-size:12px;
+        border-radius: 6px;
+    }
+
+   
 `

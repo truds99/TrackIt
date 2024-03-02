@@ -19,9 +19,9 @@ export default function TodayPage() {
     }, [])
    
     return (
-        <TodayPageStyled $colorh3={todayDone > 0}>
+        <TodayPageStyled $colorh3={todayDone > 0 && todayData.length}>
             <h1>{nowDate}</h1>
-            {todayDone > 0 ?
+            {todayDone > 0 && todayData.length ?
                 <h3>{Math.round(todayDone * 100 / todayData.length)}% completed</h3>:
                 <h3>No habits completed yet</h3>
             }

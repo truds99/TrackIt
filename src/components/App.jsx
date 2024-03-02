@@ -20,6 +20,7 @@ export default function App() {
     const [myHabits, setMyHabits] = useState('');
     const [shouldGetHabits, setShouldGetHabits] = useState(true);
     const [historyData, setHistoryData] = useState([]);
+    const [showLogout, setShowLogout] = useState(false);
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -36,6 +37,11 @@ export default function App() {
                 .catch(() => alert("error getting habits"));
         }
     }, [shouldGetHabits, loginData])
+
+    useEffect(() => {
+        setShouldGetHabits(true);
+        setShowLogout(false);
+    }, [loginData])
 
     useEffect(() => {
         if (loginData) {
@@ -72,7 +78,8 @@ export default function App() {
                 todayDone, setTodayDone,
                 myHabits, setMyHabits,
                 shouldGetHabits, setShouldGetHabits,
-                historyData, setHistoryData
+                historyData, setHistoryData,
+                showLogout, setShowLogout
             }}>
             <TopMenu />
             <Bottom />
