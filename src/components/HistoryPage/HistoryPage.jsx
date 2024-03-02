@@ -8,7 +8,7 @@ import dayjs from "dayjs"
 
 export default function HistoryPage() {
     const navigate = useNavigate();
-    const { loginData, historyData, setMenuVisible } = useContext(UserContext);
+    const { loginData, historyData, setMenuVisible, setLoginData } = useContext(UserContext);
     const [daysNotDone, setDaysNotDone] = useState([]);
     const [daysDone, setDaysDone] = useState([]);
     const [selectedDate, setSelectedDate] = useState(new Date())
@@ -16,8 +16,8 @@ export default function HistoryPage() {
     useEffect(() => setMenuVisible(true), []);
 
     useEffect(() => {
-        if (!loginData.token) {
-            navigate('/');
+        if (!loginData.token && localStorage.getItem('user')) {
+            setLoginData(JSON.parse(localStorage.getItem('user')));
         }
     }, [])
 

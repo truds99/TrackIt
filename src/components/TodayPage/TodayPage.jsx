@@ -3,18 +3,16 @@ import dayjs from 'dayjs'
 import { useEffect, useContext} from "react"
 import UserContext from "../../contexts/UserContext"
 import TodayCard from "./TodayCard"
-import { useNavigate } from 'react-router-dom'
 
 export default function TodayPage() {
     const nowDate = dayjs().format('dddd, DD/MM');
-    const { todayData, loginData, todayDone, setMenuVisible } = useContext(UserContext);
-    const navigate = useNavigate();
+    const { todayData, loginData, todayDone, setMenuVisible, setLoginData } = useContext(UserContext);
 
     useEffect(() => setMenuVisible(true), []);
     
     useEffect(() => {
-        if (!loginData.token) {
-            navigate('/');
+        if (!loginData.token && localStorage.getItem('user')) {
+            setLoginData(JSON.parse(localStorage.getItem('user')));
         }
     }, [])
    

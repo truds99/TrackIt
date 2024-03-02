@@ -1,20 +1,19 @@
 import styled from 'styled-components'
 import UserContext from '../../contexts/UserContext'
 import { useContext, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import check from '../../assets/check.svg'
 import uncheck from '../../assets/uncheck.png'
 
 export default function PastDayPage() {
     const { historyData, loginData, setMenuVisible } = useContext(UserContext);
     const { pastDay } = useParams();
-    const navigate = useNavigate();
 
     useEffect(() => setMenuVisible(true), []);  
 
     useEffect(() => {
-        if (!loginData.token) {
-            navigate('/');
+        if (!loginData.token && localStorage.getItem('user')) {
+            setLoginData(JSON.parse(localStorage.getItem('user')));
         }
     }, [])
 
