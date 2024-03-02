@@ -156,13 +156,13 @@ const HistoryPageStyled = styled.div`
         border: 1px solid #7c7c7c;
     }
 
-    [class*="--now"]:hover,  .day-uncompleted:hover, .day-completed:hover {
+    [class*="--now"]:hover, .day-uncompleted:hover, .day-completed:hover {
         border-radius: 4px;
         border: 1.6px solid #7c7c7c;
         filter: brightness(0.82);
     }
 
-    [class*="--now"]:active,  .day-uncompleted:active, .day-completed:active {
+    [class*="--now"]:active, .day-uncompleted:active, .day-completed:active {
         filter: brightness(0.52);
     }
 

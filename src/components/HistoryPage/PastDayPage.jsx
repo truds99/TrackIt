@@ -15,8 +15,8 @@ export default function PastDayPage() {
         <PastDayPageStyled>
             <h1>History {thisDay.day}</h1>
             <div>
-                {thisDay.habits.map(elm => (
-                    <CardHistory habit={elm.name} isDone={elm.done} />
+                {thisDay.habits.map((elm, idx) => (
+                    <CardHistory habit={elm.name} isDone={elm.done} key={idx} />
                 ))}
             </div>
         </PastDayPageStyled>

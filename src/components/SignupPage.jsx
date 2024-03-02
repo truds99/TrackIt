@@ -36,8 +36,8 @@ export default function SignupPage() {
         promise
             .then(() => navigate('/'))
             .catch(() => {
-                alert("Signup failed.")
-                setSubmitAvailable(true)
+                alert("Signup failed.");
+                setSubmitAvailable(true);
             })
     }
 

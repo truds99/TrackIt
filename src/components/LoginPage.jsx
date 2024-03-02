@@ -13,19 +13,28 @@ export default function LoginPage() {
 
     useEffect(() => setMenuVisible(false), []);  
 
+    useEffect(() => {
+        if (localStorage.getItem('user')) {
+            setLoginData(JSON.parse(localStorage.getItem('user')));
+            navigate('/today');
+        }
+    }, [])
+
     const handleForm = (e) => {
-        e.preventDefault()
-        if (!submitAvailable) return
-        setSubmitAvailable(false)
-        const promise = postLogin(formData)
+        e.preventDefault();
+        if (!submitAvailable) return;
+        setSubmitAvailable(false);
+        const promise = postLogin(formData);
         promise
             .then(res => {
-                setLoginData(res.data)
-                navigate('/today')
+                setLoginData(res.data);
+                const dataString = JSON.stringify(res.data);
+                localStorage.setItem('user', dataString);
+                navigate('/today');
             })
             .catch(() => {
-                alert("Login failed.")
-                setSubmitAvailable(true)
+                alert("Login failed.");
+                setSubmitAvailable(true);
             })
     }
 

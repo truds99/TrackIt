@@ -11,7 +11,7 @@ export default function TodayCard({name, current, record, done, id}) {
     const [dynamicRecord, setDynamicRecord] = useState(record);
     const [isAvailable, setIsAvailable] = useState(true);
 
-    function toggleDone () {
+    const toggleDone = () => {
         if (isAvailable) {
             setIsAvailable(false);
             if (isDone) {
