@@ -6,7 +6,7 @@ import check from '../../assets/check.svg'
 import uncheck from '../../assets/uncheck.png'
 
 export default function PastDayPage() {
-    const { historyData, loginData, setMenuVisible } = useContext(UserContext);
+    const { historyData, loginData, setMenuVisible, setLoginData } = useContext(UserContext);
     const { pastDay } = useParams();
 
     useEffect(() => setMenuVisible(true), []);  
