@@ -7,6 +7,7 @@ import Bottom from './Bottom'
 import TodayPage from './TodayPage/TodayPage'
 import HistoryPage from './HistoryPage/HistoryPage'
 import PastDayPage from "./HistoryPage/PastDayPage"
+import PrivatePage from "./PrivatePage"
 import { getTodayHabits, getHabits, getHistory } from '../services/services'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
@@ -21,10 +22,7 @@ export default function App() {
     const [shouldGetHabits, setShouldGetHabits] = useState(true);
     const [historyData, setHistoryData] = useState([]);
     const [showLogout, setShowLogout] = useState(false);
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-    });
+    const [formData, setFormData] = useState({ email: '', password: '' });
 
     useEffect(() => {
         if (shouldGetHabits && loginData.token) {
@@ -86,10 +84,10 @@ export default function App() {
             <Routes>
                 <Route path='/' element={<LoginPage />} />
                 <Route path='/signup' element={<SignupPage />} />
-                <Route path='/habits' element={<HabitsPage />} />
-                <Route path='/today' element={<TodayPage />} />
-                <Route path='/history' element={<HistoryPage />} />
-                <Route path='/history/:pastDay' element={<PastDayPage />} />
+                <Route path='/habits' element={<PrivatePage><HabitsPage /></PrivatePage>} />
+                <Route path='/today' element={<PrivatePage><TodayPage /></PrivatePage>} />
+                <Route path='/history' element={<PrivatePage><HistoryPage /></PrivatePage>} />
+                <Route path='/history/:pastDay' element={<PrivatePage><PastDayPage /></PrivatePage>} />
             </Routes>
             </UserContext.Provider>
         </BrowserRouter>
