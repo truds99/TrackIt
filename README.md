@@ -2,7 +2,7 @@
 
 An easy to use web application to track and monitor habits
 
-<img src="/src/assests/showing.gif" />
+<img src="/src/assets/showing.gif" />
 
 Try it out now at https://project10-track-it.vercel.app/
 
