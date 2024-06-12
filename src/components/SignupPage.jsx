@@ -31,7 +31,10 @@ export default function SignupPage() {
         e.preventDefault();
         if (!submitAvailable) return;
         setSubmitAvailable(false);
-        if (!validInputs()) return;
+        if (!validInputs()) {
+            setSubmitAvailable(true);
+            return;
+        }
         const promise = postSignup(formData);
         promise
             .then(() => navigate('/'))
